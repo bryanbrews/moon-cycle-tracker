@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>☽ Moon Cycle Tracker</title>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Moon Cycle Tracker">
+  <meta property="og:description" content="Moon-connected cycle tracking app.">
+  <meta name="twitter:card" content="summary_large_image">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <h1>☽ Moon Cycle Tracker</h1>
+    <p class="subtitle">Moon-Connected Cycle Tracking</p>
+  </header>
+
+  <section id="settings">
+    <h2>Your Cycle</h2>
+    <form id="settings-form">
+      <div class="field">
+        <label for="lmp">First Day of Last Period</label>
+        <input type="date" id="lmp" required>
+      </div>
+      <div class="field">
+        <label for="cycle-len">Cycle Length (days)</label>
+        <input type="number" id="cycle-len" value="28" min="21" max="45">
+      </div>
+      <div class="field">
+        <label for="period-len">Period Length (days)</label>
+        <input type="number" id="period-len" value="5" min="1" max="10">
+      </div>
+      <div class="field">
+        <label for="birth-date">Your Birth Date</label>
+        <input type="date" id="birth-date">
+      </div>
+      <button type="submit" id="save-btn">Save &amp; Calculate</button>
+    </form>
+    <button type="button" id="edit-btn" class="edit-btn" hidden>Edit Settings</button>
+  </section>
+
+  <section id="timeline-section" hidden>
+    <h2>Current Cycle</h2>
+    <div id="timeline"></div>
+    <div id="timeline-ruler"></div>
+    <div id="timeline-legend">
+      <span class="legend-item"><span class="legend-swatch period"></span>Period</span>
+      <div class="legend-item">
+        <span class="legend-swatch follicular"></span>
+        <span>Follicular</span>
+      </div>
+      <span class="legend-item"><span class="legend-swatch fertile"></span>Fertile Window</span>
+      <span class="legend-item"><span class="legend-swatch luteal"></span>Luteal Phase</span>
+      <span class="legend-item"><span class="legend-swatch today"></span>Today</span>
+      <span class="legend-item"><span class="legend-lunar-symbol">☽</span>Lunar Peak</span>
+      <span class="legend-note">Lunar Peak — when the Moon returns to the phase it held on your birth day (your natal lunar return), considered a traditional fertility high point.</span>
+    </div>
+    <div class="event-legend" data-event-legend></div>
+  </section>
+
+  <section id="summary-section" hidden>
+    <h2>Predictions</h2>
+    <div id="summary" class="summary-grid">
+      <div id="cycle-summary">
+        <div class="summary-card">
+          <h3>Standard Cycle</h3>
+          <p>Cycle Day: <span id="cycle-day">—</span></p>
+          <p>Ovulation: <span id="ovulation-date">—</span></p>
+          <p>Fertile Window: <span id="fertile-window">—</span></p>
+          <p>Next Period: <span id="next-period">—</span></p>
+        </div>
+      </div>
+      <div id="lunar-summary">
+        <div class="summary-card">
+          <h3>Lunar Fertility</h3>
+          <p class="lunar-explainer">Many traditions hold that fertility peaks when the Moon returns to the same phase it held at your birth — your <em>natal lunar return</em>. This cycle runs independently of your standard cycle and may coincide with it for heightened potential.</p>
+          <p>Your Birth Moon: <span id="birth-moon">—</span></p>
+          <p>Next Lunar Peak: <span id="lunar-return">—</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="due-date-section" hidden>
+    <h2>If Conception Occurs</h2>
+    <div id="due-date-panel">
+      <div class="due-date-card">
+        <p class="due-label">Estimated Due Date</p>
+        <p class="due-date" id="due-date">—</p>
+        <p class="zodiac" id="zodiac-sign">—</p>
+        <p class="holiday-warning" id="holiday-warning" hidden></p>
+        <p class="note">Naegele's Rule (LMP + 280 days) · if conception during fertile window</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="cycles-section" hidden>
+    <h2>6-Month Outlook</h2>
+    <p class="section-note">Each upcoming cycle, with the due date and child's zodiac sign that would result if conception occurs during that cycle's fertile window.</p>
+    <div class="cycle-legend">
+      <span class="legend-item"><span class="legend-swatch period"></span>Period</span>
+      <span class="legend-item"><span class="legend-swatch follicular"></span>Follicular</span>
+      <span class="legend-item"><span class="legend-swatch fertile"></span>Fertile Window</span>
+      <span class="legend-item"><span class="legend-swatch luteal"></span>Luteal Phase</span>
+      <span class="legend-item"><span class="legend-swatch today"></span>Today</span>
+      <span class="legend-item"><span class="legend-lunar-symbol">☽</span>Lunar Peak</span>
+      <span class="legend-note">Lunar Peak — when the Moon returns to the phase it held on your birth day (your natal lunar return), considered a traditional fertility high point.</span>
+    </div>
+    <div class="event-legend" data-event-legend></div>
+    <div id="cycles-table"></div>
+  </section>
+
+  <!-- Hidden YouTube player — created by app.js via IFrame API -->
+  <div id="yt-player" aria-hidden="true"></div>
+
+  <!-- Music controls -->
+  <div id="music-controls" role="region" aria-label="Music controls">
+    <button id="music-play" class="music-btn" title="Play / Pause" aria-label="Play or pause music">▶</button>
+    <button id="music-skip" class="music-btn" title="Skip forward" aria-label="Skip forward">⏭</button>
+  </div>
+
+  <footer>
+    <p>Moon Cycle Tracker — all data stays in your browser (localStorage), nothing is sent to any server.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

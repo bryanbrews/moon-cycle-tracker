@@ -1,0 +1,6 @@
+# Revalidate JS and CSS on every deploy so updates show up immediately.
+# (Works alongside any ?v= cache-buster you add to the script/link tags.)
+/app.js
+  Cache-Control: public, max-age=0, must-revalidate
+/styles.css
+  Cache-Control: public, max-age=0, must-revalidate

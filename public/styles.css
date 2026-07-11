@@ -1,0 +1,1102 @@
+/* =========================================================
+   Ovulate — Moon Cycle Tracker
+   Celestial / Mystical Theme
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   Custom Properties
+   --------------------------------------------------------- */
+:root {
+  --night-bg: #0d1b3e;
+  --deep-bg: #1a0a2e;
+  --moon-purple: #c9a0ff;
+  --moon-purple-dim: rgba(201, 160, 255, 0.15);
+  --moon-purple-border: rgba(201, 160, 255, 0.25);
+  --period-red: #8b2040;
+  --fertile-purple: #5a3090;
+  --follicular-bg: #1a0a2e;
+  --luteal-bg: #231540;
+  --text-main: #e8d5ff;
+  --text-muted: #a07acc;
+  --text-dim: #6b5080;
+  --card-bg: rgba(201, 160, 255, 0.08);
+  --card-border: rgba(201, 160, 255, 0.2);
+  --moon-purple-glow: rgba(201, 160, 255, 0.5);
+  --moon-purple-glow-soft: rgba(201, 160, 255, 0.2);
+  --moon-purple-focus-ring: rgba(201, 160, 255, 0.15);
+  --moon-purple-glow-mid: rgba(201, 160, 255, 0.4);
+  --fertile-purple-dark: #3d1f6e;
+}
+
+/* ---------------------------------------------------------
+   Global / Reset
+   --------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.2rem;
+  background: var(--night-bg);
+  color: var(--text-main);
+  min-height: 100vh;
+  line-height: 1.7;
+}
+
+a {
+  color: var(--moon-purple);
+  text-decoration: none;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+/* ---------------------------------------------------------
+   Header
+   --------------------------------------------------------- */
+header {
+  text-align: center;
+  padding: 3rem 2rem 2rem;
+  border-bottom: 1px solid var(--moon-purple-border);
+}
+
+header h1 {
+  font-size: 3.4rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--moon-purple);
+  text-shadow: 0 0 20px var(--moon-purple-glow), 0 0 40px var(--moon-purple-glow-soft);
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 1.2rem;
+  margin-top: 0.4rem;
+}
+
+/* ---------------------------------------------------------
+   Shared Section Headings (h2)
+   --------------------------------------------------------- */
+h2 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 1rem;
+}
+
+/* ---------------------------------------------------------
+   Settings Section
+   --------------------------------------------------------- */
+#settings {
+  max-width: 480px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+}
+
+#settings.settings-saved {
+  padding: 1rem 2rem;
+  border-color: rgba(201, 160, 255, 0.12);
+}
+
+#settings h2 {
+  color: var(--moon-purple);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.field {
+  margin-bottom: 1.2rem;
+}
+
+.field label {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.field input {
+  display: block;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: var(--deep-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  color: var(--text-main);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.1rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field input:focus {
+  border-color: var(--moon-purple);
+  box-shadow: 0 0 0 3px var(--moon-purple-focus-ring);
+}
+
+#save-btn {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--fertile-purple), var(--fertile-purple-dark));
+  color: var(--text-main);
+  border: none;
+  border-radius: 8px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.15rem;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: opacity 0.2s;
+}
+
+#save-btn:hover {
+  opacity: 0.9;
+}
+
+.edit-btn {
+  display: block;
+  width: auto;
+  margin-top: 1rem;
+  margin-left: auto;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid var(--card-border);
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: 6px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.edit-btn:hover {
+  border-color: var(--moon-purple);
+  color: var(--moon-purple);
+}
+
+/* ---------------------------------------------------------
+   Timeline Section
+   --------------------------------------------------------- */
+#timeline-section {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+#timeline {
+  display: flex;
+  height: 64px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+}
+
+.timeline-day {
+  flex: 1 1 0;
+  height: 100%;
+  position: relative;
+  cursor: default;
+  transition: background 0.2s;
+}
+
+.timeline-day.period {
+  background: var(--period-red);
+}
+
+.timeline-day.fertile {
+  background: var(--fertile-purple);
+}
+
+.timeline-day.follicular {
+  background: var(--follicular-bg);
+}
+
+.timeline-day.luteal {
+  background: var(--luteal-bg);
+}
+
+.timeline-day.today {
+  outline: 2px solid var(--moon-purple);
+  outline-offset: -2px;
+}
+
+/* Triangle indicator inside the today marker */
+.timeline-day.today::before {
+  content: '▼';
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.55rem;
+  line-height: 1;
+  color: var(--moon-purple);
+  pointer-events: none;
+}
+
+.moon-marker {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  font-size: 0.65rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.lunar-return-marker {
+  position: absolute;
+  top: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  line-height: 1;
+  color: var(--moon-purple);
+  text-shadow: 0 0 6px var(--moon-purple-glow), 0 0 12px var(--moon-purple-glow-soft);
+  pointer-events: none;
+}
+
+/* Planetary event marker — warm gold, distinct from the purple lunar markers.
+   Sits at the top-left so the bottom edge is free for the retrograde lanes. */
+.event-marker {
+  position: absolute;
+  top: 3px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  color: #ffd98a;
+  line-height: 0;
+  pointer-events: none;
+}
+
+.event-marker svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 0 4px rgba(255, 217, 138, 0.55));
+}
+
+/* Span events (planetary retrogrades) — thin highlight lines along the lower
+   edge of the calendar bar. Adjacent days overlap by 1px so each line reads as
+   one continuous strip. */
+.span-bar {
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  height: 3px;
+  pointer-events: none;
+}
+
+.span-bar.span-start {
+  left: 1px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.span-bar.span-end {
+  right: 1px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+/* Each planet gets its own stacked lane so overlapping retrogrades never
+   sit on top of one another. */
+.span-bar.span-retrograde-mercury { bottom: 0; }
+.span-bar.span-retrograde-venus   { bottom: 4px; }
+.span-bar.span-retrograde-mars    { bottom: 8px; }
+.span-bar.span-meteor             { bottom: 12px; }
+
+/* Distinct, high-visibility colors (shared by the bar and the legend swatch) */
+.span-retrograde-mercury { background: #3ec8ff; box-shadow: 0 0 4px rgba(62, 200, 255, 0.7); }  /* cyan */
+.span-retrograde-venus   { background: #ffd24a; box-shadow: 0 0 4px rgba(255, 210, 74, 0.7); }  /* gold */
+.span-retrograde-mars    { background: #ff5a5a; box-shadow: 0 0 4px rgba(255, 90, 90, 0.7); }   /* red  */
+.span-meteor             { background: #e2e8ff; box-shadow: 0 0 4px rgba(226, 232, 255, 0.8); } /* silvery white */
+
+/* Legend swatch showing the span bar style */
+.span-swatch {
+  display: inline-block;
+  width: 22px;
+  height: 4px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ── Timeline ruler ── */
+#timeline-ruler {
+  margin-top: 4px;
+}
+
+.ruler-days {
+  display: flex;
+}
+
+.ruler-day {
+  flex: 1 1 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.9;
+  font-variant-numeric: tabular-nums;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.ruler-day.ruler-today {
+  color: var(--moon-purple);
+  font-weight: 600;
+}
+
+.ruler-months {
+  display: flex;
+  margin-top: 4px;
+}
+
+.ruler-month {
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding-top: 6px;
+  border-top: 1px solid var(--moon-purple-border);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ruler-month-alt {
+  border-top-color: rgba(201, 160, 255, 0.45);
+  color: var(--moon-purple);
+}
+
+#timeline-legend {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  font-size: 1.15rem;
+  color: var(--text-main);
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legend-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.legend-swatch.period {
+  background: var(--period-red);
+}
+
+.legend-swatch.follicular { background: var(--follicular-bg); border: 1px solid var(--card-border); }
+
+.legend-swatch.fertile {
+  background: var(--fertile-purple);
+}
+
+.legend-swatch.luteal {
+  background: var(--luteal-bg);
+  border: 1px solid var(--card-border);
+}
+
+.legend-swatch.today {
+  background: transparent;
+  outline: 2px solid var(--moon-purple);
+  outline-offset: -1px;
+}
+
+.legend-lunar-symbol {
+  font-size: 0.85rem;
+  color: var(--moon-purple);
+  text-shadow: 0 0 6px var(--moon-purple-glow-soft);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Planetary events key — gold icons, shared by the timeline and 6-month outlook */
+.event-legend {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 0.75rem;
+  font-size: 1.15rem;
+  color: var(--text-main);
+  flex-wrap: wrap;
+}
+
+.event-legend-title {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.9rem;
+  color: #ffd98a;
+}
+
+.event-legend-icon {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  color: #ffd98a;
+  flex-shrink: 0;
+}
+
+.event-legend-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Short definition lines beneath a key */
+.legend-note {
+  flex-basis: 100%;
+  font-size: 1.02rem;
+  font-style: italic;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-top: 0.1rem;
+}
+
+/* ---------------------------------------------------------
+   Summary Section
+   --------------------------------------------------------- */
+#summary-section {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.summary-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 1.75rem;
+}
+
+.summary-card h3 {
+  color: var(--moon-purple);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.summary-card p {
+  margin-bottom: 0.7rem;
+  color: var(--text-muted);
+  font-size: 1.15rem;
+}
+
+.lunar-explainer {
+  font-size: 1rem;
+  color: var(--text-dim);
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 1.1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.summary-card span {
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.holiday-warning {
+  font-size: 0.95rem;
+  color: #e8c46a;
+  background: rgba(232, 196, 106, 0.08);
+  border: 1px solid rgba(232, 196, 106, 0.25);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin: 0.75rem 0 0.5rem;
+  line-height: 1.5;
+}
+
+.note {
+  font-size: 1rem;
+  color: var(--text-dim);
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+/* ---------------------------------------------------------
+   Due Date Section
+   --------------------------------------------------------- */
+#due-date-section {
+  max-width: 600px;
+  margin: 2rem auto 4rem;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.due-date-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 2.25rem;
+}
+
+.due-label {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+
+.due-date {
+  font-size: 2.6rem;
+  color: var(--moon-purple);
+  display: block;
+  margin: 0.5rem 0;
+  text-shadow: 0 0 16px var(--moon-purple-glow-mid);
+}
+
+.zodiac {
+  display: block;
+  margin: 0.75rem 0 0.5rem;
+}
+.zodiac-glyph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+.zodiac-glyph svg {
+  width: 110px;
+  height: 110px;
+  color: var(--moon-purple);
+  filter: drop-shadow(0 0 10px var(--moon-purple-glow-soft)) drop-shadow(0 0 4px var(--moon-purple-glow-soft));
+}
+.zodiac-glyph .sign-name {
+  font-size: 1.2rem;
+  color: var(--moon-purple);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 300;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+/* ---------------------------------------------------------
+   6-Month Outlook
+   --------------------------------------------------------- */
+#cycles-section {
+  max-width: 900px;
+  margin: 2rem auto 4rem;
+  padding: 0 2rem;
+}
+
+.section-note {
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Key / legend — mirrors the current-cycle legend */
+.cycle-legend {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.15rem;
+  color: var(--text-main);
+  flex-wrap: wrap;
+}
+
+/* Planetary events key above the outlook cards needs breathing room below */
+#cycles-section .event-legend {
+  margin-bottom: 1.5rem;
+}
+
+.cycle-row {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.cycle-row-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.6rem;
+}
+
+.cycle-label {
+  color: var(--moon-purple);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.95rem;
+}
+
+.cycle-dates {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+/* Phase bar — mirrors #timeline so the bars match the current cycle */
+.cycle-bar {
+  display: flex;
+  height: 48px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+}
+
+.cycle-ruler {
+  margin-top: 4px;
+}
+
+.cycle-row-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.9rem;
+  gap: 1rem;
+}
+
+.cycle-foot-label {
+  display: block;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.9rem;
+}
+
+.cycle-fertile-dates {
+  color: #b89aff;
+  font-size: 1.15rem;
+}
+
+.cycle-result {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.cycle-due {
+  text-align: right;
+}
+
+.cycle-due-date {
+  color: var(--moon-purple);
+  font-size: 1.45rem;
+  text-shadow: 0 0 12px var(--moon-purple-glow-soft);
+}
+
+.cycle-sign {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.cycle-sign-icon svg {
+  width: 46px;
+  height: 46px;
+  color: var(--moon-purple);
+  filter: drop-shadow(0 0 8px var(--moon-purple-glow-soft));
+  display: block;
+}
+
+.cycle-sign-name {
+  color: var(--moon-purple);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 1.05rem;
+  font-weight: 300;
+}
+
+/* ---------------------------------------------------------
+   WebKit Date Input Color Fix
+   --------------------------------------------------------- */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.8) sepia(1) saturate(0.5) hue-rotate(200deg);
+}
+
+/* ---------------------------------------------------------
+   Responsive — tablets and below
+   --------------------------------------------------------- */
+@media (max-width: 700px) {
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------------------------
+   Mobile redesign — larger type, taller bars, bigger icons
+   --------------------------------------------------------- */
+@media (max-width: 600px) {
+  body {
+    font-size: 1.25rem;
+  }
+
+  header {
+    padding: 2.25rem 1.25rem 1.5rem;
+  }
+
+  header h1 {
+    font-size: 2.9rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+  }
+
+  h2 {
+    font-size: 1.55rem;
+  }
+
+  /* ── Settings form ── */
+  #settings {
+    margin: 1.5rem 1rem;
+    padding: 1.5rem;
+  }
+
+  .field label {
+    font-size: 1.05rem;
+  }
+
+  .field input {
+    font-size: 1.15rem; /* >=16px stops iOS auto-zooming on focus */
+    padding: 0.95rem 1rem;
+  }
+
+  #save-btn {
+    font-size: 1.35rem;
+    padding: 1.15rem;
+  }
+
+  .edit-btn {
+    font-size: 1.15rem;
+    padding: 0.65rem 1.5rem;
+  }
+
+  /* ── Section padding / spacing ── */
+  #timeline-section,
+  #summary-section,
+  #due-date-section,
+  #cycles-section {
+    padding: 0 1rem;
+  }
+
+  #due-date-section,
+  #cycles-section {
+    margin-bottom: 5rem; /* clear floating music buttons */
+  }
+
+  /* ── Calendar bars: taller with wider day cells so markers are legible.
+        They scroll horizontally so nothing is cramped. ── */
+  #timeline-section {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #timeline-section h2 {
+    padding: 0;
+  }
+
+  #timeline {
+    height: 88px;
+    min-width: 780px;
+  }
+
+  #timeline-ruler {
+    min-width: 780px;
+  }
+
+  .cycle-track {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cycle-bar {
+    height: 78px;
+    min-width: 760px;
+  }
+
+  .cycle-ruler {
+    min-width: 760px;
+  }
+
+  /* ── Bigger in-bar day markers (top-left = event, top-right = moon) ── */
+  .moon-marker {
+    font-size: 0.95rem;
+    top: 3px;
+    right: 3px;
+  }
+
+  .lunar-return-marker {
+    font-size: 1.15rem;
+    top: 4px;
+  }
+
+  .timeline-day.today::before {
+    font-size: 0.8rem;
+    top: 3px;
+  }
+
+  .event-marker {
+    width: 17px;
+    height: 17px;
+    top: 4px;
+    left: 3px;
+  }
+
+  /* Thicker, more separated retrograde / meteor lanes */
+  .span-bar { height: 4px; }
+  .span-bar.span-retrograde-mercury { bottom: 0; }
+  .span-bar.span-retrograde-venus   { bottom: 6px; }
+  .span-bar.span-retrograde-mars    { bottom: 12px; }
+  .span-bar.span-meteor             { bottom: 18px; }
+
+  /* ── Ruler ── */
+  .ruler-day {
+    font-size: 0.95rem;
+  }
+
+  .ruler-month {
+    font-size: 0.9rem;
+  }
+
+  /* ── Legends / keys ── */
+  #timeline-legend,
+  .cycle-legend,
+  .event-legend {
+    font-size: 1.2rem;
+    gap: 0.9rem 1.25rem;
+  }
+
+  .legend-swatch {
+    width: 18px;
+    height: 18px;
+  }
+
+  .legend-lunar-symbol {
+    font-size: 1.1rem;
+  }
+
+  .event-legend-title {
+    font-size: 0.95rem;
+  }
+
+  .event-legend-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .span-swatch {
+    width: 30px;
+    height: 5px;
+  }
+
+  .legend-note {
+    font-size: 1.08rem;
+  }
+
+  /* ── Summary cards ── */
+  .summary-card {
+    padding: 1.4rem;
+  }
+
+  .summary-card h3 {
+    font-size: 1.5rem;
+  }
+
+  .summary-card p {
+    font-size: 1.25rem;
+  }
+
+  .lunar-explainer {
+    font-size: 1.1rem;
+  }
+
+  .holiday-warning {
+    font-size: 1.05rem;
+  }
+
+  .note {
+    font-size: 1rem;
+  }
+
+  /* ── Due date ── */
+  .due-label {
+    font-size: 1.05rem;
+  }
+
+  .due-date {
+    font-size: 2.4rem;
+  }
+
+  .zodiac-glyph svg {
+    width: 130px;
+    height: 130px;
+  }
+
+  .zodiac-glyph .sign-name {
+    font-size: 1.35rem;
+  }
+
+  /* ── 6-month outlook ── */
+  .section-note {
+    font-size: 1.1rem;
+  }
+
+  .cycle-row {
+    padding: 1.1rem;
+  }
+
+  .cycle-label {
+    font-size: 1.05rem;
+  }
+
+  .cycle-dates {
+    font-size: 1.1rem;
+  }
+
+  /* Stack fertile window and result on narrow screens */
+  .cycle-row-foot {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9rem;
+  }
+
+  .cycle-foot-label {
+    font-size: 0.95rem;
+  }
+
+  .cycle-fertile-dates {
+    font-size: 1.25rem;
+  }
+
+  .cycle-due-date {
+    font-size: 1.55rem;
+  }
+
+  .cycle-sign-icon svg {
+    width: 54px;
+    height: 54px;
+  }
+
+  .cycle-sign-name {
+    font-size: 1.2rem;
+  }
+
+  /* ── Music buttons: larger tap targets ── */
+  #music-controls {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    gap: 0.6rem;
+  }
+
+  .music-btn {
+    width: 56px;
+    height: 56px;
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 400px) {
+  header h1 {
+    font-size: 2.45rem;
+  }
+
+  .due-date {
+    font-size: 2.1rem;
+  }
+}
+
+/* ---------------------------------------------------------
+   Footer
+   --------------------------------------------------------- */
+footer {
+  text-align: center;
+  padding: 2rem 2rem 5rem;
+  border-top: 1px solid var(--moon-purple-border);
+  margin-top: 2rem;
+}
+
+footer a {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+footer a:hover {
+  color: var(--moon-purple);
+  opacity: 1;
+}
+
+/* ─── Music controls ─────────────────────────────────────────────────────── */
+
+#yt-player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  border: 0;
+  pointer-events: none;
+}
+
+#music-controls {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 200;
+}
+
+.music-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(201, 160, 255, 0.08);
+  border: 1px solid rgba(201, 160, 255, 0.28);
+  color: var(--moon-purple);
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  line-height: 1;
+  padding: 0;
+  font-family: inherit;
+}
+
+.music-btn:hover {
+  background: rgba(201, 160, 255, 0.18);
+  border-color: rgba(201, 160, 255, 0.5);
+}
