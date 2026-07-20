@@ -4,6 +4,8 @@
 
 A moon-phase cycle tracking app that combines standard menstrual cycle predictions with lunar fertility tracking. Enter the first day of your last period, your cycle length, period length, and optionally your birth date. The app calculates your fertile window, ovulation date, next period, and — if you provide your birth date — your natal lunar return (the day each month when the Moon returns to the phase it held when you were born, a traditional fertility high point). A 6-month outlook shows upcoming cycles with potential due dates and zodiac signs. An embedded ambient music player adds to the experience.
 
+![Screenshot](docs/screenshot.png)
+
 **All data stays in your browser's localStorage. Nothing is sent to any server.**
 
 ## Features
